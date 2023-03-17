@@ -1,4 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 // import { GlobalStyles } from './components/styles/GlobalStyles'
 
 function App() {
@@ -6,9 +8,10 @@ function App() {
 
   return (
     <Fragment>
-      <div className="App">
-        <h1>Budget App</h1>
-      </div>
+      {/* <GlobalStyles /> */}
+      <Container>
+        <h1>Spend Wise</h1>
+      </Container>
     </Fragment>
   )
 }
