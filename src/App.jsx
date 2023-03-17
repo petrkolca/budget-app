@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+import { Container, Stack, Button } from 'react-bootstrap';
 // import { GlobalStyles } from './components/styles/GlobalStyles'
+import { Grid } from './components/styles/Grid.styled';
+import BudgetCard from './components/BudgetCard';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,11 +10,24 @@ function App() {
   return (
     <Fragment>
       {/* <GlobalStyles /> */}
-      <Container>
-        <h1>Spend Wise</h1>
+      <Container className="my-4">
+        <Stack direction="horizontal" gap="2" className="mb-4">
+          <h1 className='me-auto'>Spend Wise</h1>
+          <Button variant="primary">Add Budget</Button>
+          <Button variant="outline-primary">Add Expense</Button>
+        </Stack>
+        <Grid>
+          <BudgetCard 
+            name="Entertainment"
+            amount={200}
+            max={1000}
+          >
+
+          </BudgetCard>
+        </Grid>
       </Container>
     </Fragment>
   )
 }
 
-export default App
+export default App;
