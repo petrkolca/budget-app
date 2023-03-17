@@ -19,7 +19,8 @@ function App() {
         <Grid>
           <BudgetCard 
             name="Entertainment"
-            amount={200}
+            gray
+            amount={800}
             max={1000}
           >
 
