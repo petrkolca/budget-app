@@ -17,7 +17,7 @@ const useBudgetCtx = () => {
 }
 
 const AppProvider = (props) => {
-  const [budgets, setBudgets] = useLocalStorage("budgets", []);
+  const [budgets, setBudgets] = useLocalStorage("budgets", []); // (key, defValue)
   const [expenses, setExpenses] = useLocalStorage("expenses", []);
 
   const addBudget = ({budgetName, budgetMaxValue}) => {
