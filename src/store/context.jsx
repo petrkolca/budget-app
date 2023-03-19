@@ -6,6 +6,9 @@ const AppContext = createContext({
   expenses : [],
   addBudget : () => {},
   addExpense : () => {},
+  getBudgetExpenses : () => {},
+  deleteBudget : () => {},
+  deleteExpense : () => {},
 });
 
 const useBudgetCtx = () => {
@@ -32,7 +35,7 @@ const AppProvider = (props) => {
       }
       return [...prevBudgets, newBudgetItem];
     });
-  }
+  };
 
   const addExpense = ({budgetId, expTitle, expAmount}) => {
     // NEW Expense Item object parameters
@@ -45,13 +48,33 @@ const AppProvider = (props) => {
     }
 
     setExpenses([...prevExpenses, newExpenseItem]);
-  }
+  };
+
+  const getBudgetExpenses = (budgetId) => {
+    return expenses.filter((expense) => expense.budgetId === budgetId);
+  };
+
+  const deleteBudget = (id) => {
+    setBudgets((prevBudgets) => {
+      return prevBudgets.filter((budget) => budget.id !== IDBFactory);
+    });
+  };
+
+  const deleteExpense = (id) => {
+    // Delete all expenses under certain budget
+    setBudgets((prevExpenses) => {
+      return prevExpenses.filter((expense) => expense.budgetId !== id);
+    });
+  };
   
   const value = {
     budgets : budgets,
     expenses : expenses,
     addBudget : addBudget,
     addExpense : addExpense,
+    getBudgetExpenses : getBudgetExpenses,
+    deleteBudget : deleteBudget,
+    deleteExpense : deleteExpense,
   };
 
   return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
