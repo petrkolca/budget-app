@@ -2,15 +2,17 @@ import React, { createContext, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-const AppContext = createContext({
-  budgets : [],
-  expenses : [],
-  addBudget : () => {},
-  addExpense : () => {},
-  getBudgetExpenses : () => {},
-  deleteBudget : () => {},
-  deleteExpense : () => {},
-});
+const AppContext = createContext(
+  // {
+  //   budgets : [],
+  //   expenses : [],
+  //   addBudget : () => {},
+  //   addExpense : () => {},
+  //   getBudgetExpenses : () => {},
+  //   deleteBudget : () => {},
+  //   deleteExpense : () => {},
+  // }
+);
 
 const useBudgetCtx = () => {
   return useContext(AppContext)
@@ -81,4 +83,4 @@ const AppProvider = (props) => {
   return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
 }
 
-export {AppContext, useBudgetCtx, AppProvider};
+export {useBudgetCtx, AppProvider};

@@ -6,23 +6,23 @@ import BudgetCard from './components/BudgetCard';
 import AddBudgetModal from './components/AddBudgetModal';
 
 function App() {
-  const [show, setShow] = useState(false);
+  const [showBudgetModal, setShowBudgetModal] = useState(false);
 
-  const showHideBudgetModalHandler = (e) => {
+  const showBudgetModalHandler = (e) => {
     e.preventDefault();
-    setShow(!show);
+    setShowBudgetModal(true);
 
-    console.log('show state is: ', show);
+    console.log('showBudgetModal state is: ', showBudgetModal);
   }
 
   return (
     <Fragment>
       {/* <GlobalStyles /> */}
-      <AddBudgetModal show={show} handleClose={showHideBudgetModalHandler} />
+      <AddBudgetModal show={showBudgetModal} closeModalHandler={() => setShowBudgetModal(false)} />
       <Container className="my-4">
         <Stack direction="horizontal" gap="2" className="mb-4">
           <h1 className='me-auto'>Spend Wise</h1>
-          <Button variant="primary" onClick={showHideBudgetModalHandler}>Add Budget</Button>
+          <Button variant="primary" onClick={showBudgetModalHandler}>Add Budget</Button>
           <Button variant="outline-primary">Add Expense</Button>
         </Stack>
         <Grid>
