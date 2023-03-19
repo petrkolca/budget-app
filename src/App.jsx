@@ -22,9 +22,8 @@ function App() {
             gray
             amount={800}
             max={1000}
-          >
-
-          </BudgetCard>
+          />
+          
         </Grid>
       </Container>
     </Fragment>

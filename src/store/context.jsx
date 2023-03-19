@@ -1,6 +1,10 @@
-import { createContext } from "react";
+import React, { createContext, useContext } from "react";
 
 const AppContext = createContext();
+
+const useBudgetCtx = () => {
+  return useContext(AppContext)
+}
 
 const AppProvider = (props) => {
   const value = "";
@@ -8,4 +12,4 @@ const AppProvider = (props) => {
   return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
 }
 
-export {AppContext, AppProvider};
+export {AppContext, useBudgetCtx, AppProvider};
