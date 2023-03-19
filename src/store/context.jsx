@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
-import { uuid } from "uuidv4";
+import { v4 as uuidv4 } from "uuid";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const AppContext = createContext({
   budgets : [],
@@ -16,13 +17,13 @@ const useBudgetCtx = () => {
 }
 
 const AppProvider = (props) => {
-  const [budgets, setBudgets] = useState();
-  const [expenses, setExpenses] = useState();
+  const [budgets, setBudgets] = useLocalStorage("budgets", []);
+  const [expenses, setExpenses] = useLocalStorage("expenses", []);
 
   const addBudget = ({budgetName, budgetMaxValue}) => {
     // NEW Budget Item object parameters
     const newBudgetItem = {
-      id: uuid(),
+      id: uuidv4(),
       name: budgetName,
       max: budgetMaxValue,
     }
@@ -41,7 +42,7 @@ const AppProvider = (props) => {
     // NEW Expense Item object parameters
     // under certain Budget ID
     const newExpenseItem = {
-      id: uuid(),
+      id: uuidv4(),
       budgetId: budgetId,
       title: expTitle,
       amount: expAmount,
