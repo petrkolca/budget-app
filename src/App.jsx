@@ -4,9 +4,12 @@ import { Container, Stack, Button } from 'react-bootstrap';
 import { Grid } from './components/styles/Grid.styled';
 import BudgetCard from './components/BudgetCard';
 import AddBudgetModal from './components/AddBudgetModal';
+import { useBudgetCtx } from './store/context';
+
 
 function App() {
   const [showBudgetModal, setShowBudgetModal] = useState(false);
+  const { budgets, getBudgetExpenses } = useBudgetCtx();
 
   const showBudgetModalHandler = (e) => {
     e.preventDefault();
@@ -26,12 +29,30 @@ function App() {
           <Button variant="outline-primary">Add Expense</Button>
         </Stack>
         <Grid>
-          <BudgetCard 
-            name="Entertainment"
-            gray
-            amount={800}
-            max={1000}
-          />
+          {budgets.map((budget) => {
+
+            // get single digit of all expenses
+            let expenses = getBudgetExpenses(budget.id);
+            let amount;
+            
+            // if there are no expenses with empty array [] return 0
+            if (expenses.length === 0) {
+              amount = 0;
+            } else {
+              amount = expenses.reduce((total, expense) => {
+                // total amount (multiplier) of all expenses (starting 0) + each expense amount
+                return total + expense.amount;
+              }, 0);
+            }
+
+            return (
+              <BudgetCard 
+                name={budget.name}
+                amount={amount}
+                max={budget.max}
+              />
+            )
+          })}
 
         </Grid>
       </Container>

@@ -53,8 +53,8 @@ const AppProvider = (props) => {
     setExpenses([...prevExpenses, newExpenseItem]);
   };
 
-  const getBudgetExpenses = (budgetId) => {
-    return expenses.filter((expense) => expense.budgetId === budgetId);
+  const getBudgetExpenses = (id) => {
+    return expenses.filter((expense) => expense.budgetId === id);
   };
 
   const deleteBudget = (id) => {
