@@ -10,25 +10,34 @@ import { useBudgetCtx } from './store/context';
 
 function App() {
   const [showBudgetModal, setShowBudgetModal] = useState(false);
+  const [showExpenseModal, setShowExpenseModal] = useState(false);
+  const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
   const { budgets, getBudgetExpenses } = useBudgetCtx();
 
   const showBudgetModalHandler = (e) => {
     e.preventDefault();
     setShowBudgetModal(true);
+  }
 
-    console.log('showBudgetModal state is: ', showBudgetModal);
+  const showExpenseModalHandler = (budgetId) => {
+    setShowExpenseModal(true);
+    setAddExpenseModalBudgetId(budgetId);
   }
 
   return (
     <Fragment>
       {/* <GlobalStyles /> */}
       <AddBudgetModal show={showBudgetModal} closeModalHandler={() => setShowBudgetModal(false)} />
-      <AddExpenseModal show={true} closeModalHandler={() => setShowBudgetModal(false)} />
+      <AddExpenseModal 
+        show={showExpenseModal} 
+        closeModalHandler={() => setShowExpenseModal(false)} 
+        defaultBudgetId={addExpenseModalBudgetId}
+      />
       <Container className="my-4">
         <Stack direction="horizontal" gap="2" className="mb-4">
           <h1 className='me-auto'>Spend Wise</h1>
           <Button variant="primary" onClick={showBudgetModalHandler}>Add Budget</Button>
-          <Button variant="outline-primary">Add Expense</Button>
+          <Button variant="outline-primary" onClick={showExpenseModalHandler}>Add Expense</Button>
         </Stack>
         <Grid>
           {budgets.map((budget) => {
@@ -49,9 +58,11 @@ function App() {
 
             return (
               <BudgetCard 
+                key={budget.id}
                 name={budget.name}
                 amount={amount}
                 max={budget.max}
+                onAddExpenseBtnClick={() => showExpenseModalHandler(budget.id)}
               />
             )
           })}
