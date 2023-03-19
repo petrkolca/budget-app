@@ -52,7 +52,9 @@ const AppProvider = (props) => {
       amount: expAmount,
     }
 
-    setExpenses([...prevExpenses, newExpenseItem]);
+    setExpenses((prevExpenses) => {
+      return [...prevExpenses, newExpenseItem]
+    });
   };
 
   const getBudgetExpenses = (id) => {
