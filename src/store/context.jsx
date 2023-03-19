@@ -14,6 +14,8 @@ const AppContext = createContext(
   // }
 );
 
+const uncategorisedBudgetId = "Uncategorised";
+
 const useBudgetCtx = () => {
   return useContext(AppContext)
 }
@@ -83,4 +85,4 @@ const AppProvider = (props) => {
   return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
 }
 
-export {useBudgetCtx, AppProvider};
+export {useBudgetCtx, AppProvider, uncategorisedBudgetId};
