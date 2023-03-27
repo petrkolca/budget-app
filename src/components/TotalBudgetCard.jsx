@@ -22,7 +22,8 @@ const TotalBudgetCard = () => {
       name="Total" 
       amount={amount}
       gray
-      max={max} />
+      max={max}
+      hideButtons />
   );
 }
 

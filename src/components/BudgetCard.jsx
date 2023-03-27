@@ -4,7 +4,7 @@ import { currencyFormatter } from '../utils/utils';
 import { StyledCard } from './styles/Card.styled';
 
 
-const BudgetCard = ({name, amount, max, gray, onAddExpenseBtnClick}) => {
+const BudgetCard = ({name, amount, max, gray, hideButtons, onAddExpenseBtnClick}) => {
 
   const classNames = [];
   if (amount > max) {
@@ -44,10 +44,12 @@ const BudgetCard = ({name, amount, max, gray, onAddExpenseBtnClick}) => {
             now={amount}
           />
         }
-        <Stack direction="horizontal" gap="2" className="mt-4">
-          <Button onClick={onAddExpenseBtnClick} variant="outline-primary ms-auto">Add Expense</Button>
-          <Button variant="outline-secondary">View Expenses</Button>
-        </Stack>
+        {!hideButtons &&
+          <Stack direction="horizontal" gap="2" className="mt-4">
+            <Button onClick={onAddExpenseBtnClick} variant="outline-primary ms-auto">Add Expense</Button>
+            <Button variant="outline-secondary">View Expenses</Button>
+          </Stack>
+        }
       </Card.Body>
     </StyledCard>
   );
