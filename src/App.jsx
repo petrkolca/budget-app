@@ -68,7 +68,7 @@ function App() {
               />
             )
           })}
-          <UncategorisedBudgetCard />
+          <UncategorisedBudgetCard onAddExpenseBtnClick={showExpenseModalHandler} />
           <TotalBudgetCard />
         </Grid>
       </Container>
