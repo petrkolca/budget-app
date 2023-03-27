@@ -1,4 +1,4 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Stack } from "react-bootstrap";
 import { StyledForm } from "./styles/Form.styled";
 import { useBudgetCtx, uncategorisedBudgetId } from "../store/context";
 
@@ -16,30 +16,28 @@ const ViewExpenseModal = ({budgetId, closeModalHandler}) => {
 
   return (
     <Modal show={budgetId != null} onHide={closeModalHandler}>
-      <StyledForm onSubmit={onSubmitHandler}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <Stack direction="horizontal" gap="2">
-              <div>Expenses - {budget.name}</div>
-              {budgetId !== uncategorisedBudgetId && (
-                <button 
-                  variant="outlined-danger"
-                  onClick={() => {
-                    deleteBudget();
-                    closeModalHandler();
-                  }}
-                >
-                  Delete
-                </button>
-              )}
-            </Stack>
-          </Modal.Title>
-        </Modal.Header>
+      <Modal.Header closeButton>
+        <Modal.Title>
+          <Stack direction="horizontal" gap="2">
+            <div>Expenses - {budget?.name}</div>
+            {budgetId !== uncategorisedBudgetId && (
+              <Button 
+                variant="outlined-danger"
+                onClick={() => {
+                  deleteBudget();
+                  closeModalHandler();
+                }}
+              >
+                Delete
+              </Button>
+            )}
+          </Stack>
+        </Modal.Title>
+      </Modal.Header>
 
-        <Modal.Body>
-         
-        </Modal.Body>
-      </StyledForm>
+      <Modal.Body>
+        
+      </Modal.Body>
     </Modal>
   );
 }

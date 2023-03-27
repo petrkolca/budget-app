@@ -7,12 +7,14 @@ import UncategorisedBudgetCard from './components/UncategorisedBudgetCard';
 import TotalBudgetCard from './components/TotalBudgetCard';
 import AddBudgetModal from './components/AddBudgetModal';
 import AddExpenseModal from './components/AddExpenseModal';
-import { useBudgetCtx } from './store/context';
+import ViewExpenseModal from './components/ViewExpenseModal';
+import { uncategorisedBudgetId, useBudgetCtx } from './store/context';
 
 
 function App() {
   const [showBudgetModal, setShowBudgetModal] = useState(false);
   const [showExpenseModal, setShowExpenseModal] = useState(false);
+  const [viewExpenseModalBudgetId, setViewExpenseModalBudgetId] = useState();
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
   const { budgets, getBudgetExpenses } = useBudgetCtx();
 
@@ -34,6 +36,10 @@ function App() {
         show={showExpenseModal} 
         closeModalHandler={() => setShowExpenseModal(false)} 
         defaultBudgetId={addExpenseModalBudgetId}
+      />
+      <ViewExpenseModal 
+        budgetId={viewExpenseModalBudgetId} 
+        closeModalHandler={() => setViewExpenseModalBudgetId()} 
       />
       <Container className="my-4">
         <Stack direction="horizontal" gap="2" className="mb-4">
@@ -65,10 +71,14 @@ function App() {
                 amount={amount}
                 max={budget.max}
                 onAddExpenseBtnClick={() => showExpenseModalHandler(budget.id)}
+                onViewExpenseBtnClick={() => setViewExpenseModalBudgetId(budget.id)}
               />
             )
           })}
-          <UncategorisedBudgetCard onAddExpenseBtnClick={showExpenseModalHandler} />
+          <UncategorisedBudgetCard 
+            onAddExpenseBtnClick={showExpenseModalHandler} 
+            onViewExpenseBtnClick={() => setViewExpenseModalBudgetId(uncategorisedBudgetId)}
+          />
           <TotalBudgetCard />
         </Grid>
       </Container>
