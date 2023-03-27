@@ -10,7 +10,7 @@ import AddExpenseModal from './components/AddExpenseModal';
 import ViewExpenseModal from './components/ViewExpenseModal';
 import { uncategorisedBudgetId, useBudgetCtx } from './store/context';
 
-
+  
 function App() {
   const [showBudgetModal, setShowBudgetModal] = useState(false);
   const [showExpenseModal, setShowExpenseModal] = useState(false);
