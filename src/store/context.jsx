@@ -3,15 +3,15 @@ import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const AppContext = createContext(
-  // {
-  //   budgets : [],
-  //   expenses : [],
-  //   addBudget : () => {},
-  //   addExpense : () => {},
-  //   getBudgetExpenses : () => {},
-  //   deleteBudget : () => {},
-  //   deleteExpense : () => {},
-  // }
+  {
+    budgets : [],
+    expenses : [],
+    addBudget : () => {},
+    addExpense : () => {},
+    getBudgetExpenses : () => {},
+    deleteBudget : () => {},
+    deleteExpense : () => {},
+  }
 );
 
 const uncategorisedBudgetId = "Uncategorised";
@@ -62,14 +62,16 @@ const AppProvider = (props) => {
   };
 
   const deleteBudget = (id) => {
+    console.log('Budget delete func. init', id)
     setBudgets((prevBudgets) => {
-      return prevBudgets.filter((budget) => budget.id !== IDBFactory);
+      return prevBudgets.filter((budget) => budget.id !== id);
     });
   };
 
   const deleteExpense = (id) => {
     // Delete all expenses under certain budget
-    setBudgets((prevExpenses) => {
+    console.log('expense delete func. init', id)
+    setExpenses((prevExpenses) => {
       return prevExpenses.filter((expense) => expense.budgetId !== id);
     });
   };

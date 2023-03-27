@@ -1,6 +1,7 @@
 import { Modal, Button, Stack } from "react-bootstrap";
 import { StyledForm } from "./styles/Form.styled";
 import { useBudgetCtx, uncategorisedBudgetId } from "../store/context";
+import { currencyFormatter } from "../utils/utils";
 
 
 const ViewExpenseModal = ({budgetId, closeModalHandler}) => {
@@ -12,19 +13,21 @@ const ViewExpenseModal = ({budgetId, closeModalHandler}) => {
       id: uncategorisedBudgetId,
     } : 
     // find our budget from the Array of Budgets
-    budgets.find(budget => budget.id === budgetId)
+    budgets.find(budget => budget.id === budgetId);
+    
+  const expenses = getBudgetExpenses(budgetId);
 
   return (
     <Modal show={budgetId != null} onHide={closeModalHandler}>
       <Modal.Header closeButton>
         <Modal.Title>
           <Stack direction="horizontal" gap="2">
-            <div>Expenses - {budget?.name}</div>
+            <div className="me-auto">Expenses - {budget?.name}</div>
             {budgetId !== uncategorisedBudgetId && (
               <Button 
-                variant="outlined-danger"
+                variant="outline-danger"
                 onClick={() => {
-                  deleteBudget();
+                  deleteBudget(budgetId);
                   closeModalHandler();
                 }}
               >
@@ -36,7 +39,22 @@ const ViewExpenseModal = ({budgetId, closeModalHandler}) => {
       </Modal.Header>
 
       <Modal.Body>
-        
+        <Stack direction="vertical" gap="2">
+          {expenses.map((expense, index) => (
+            <Stack key={expense.id} direction="horizontal" gap="3">
+              <div className="me-auto fs-4">{expense.title}</div>
+              <div className="fs-5">{currencyFormatter.format(expense.amount)}</div>
+              <Button 
+                variant="outline-danger"
+                size="sm"
+                onClick={() => deleteExpense(budgetId)} 
+              >
+                &times;
+              </Button>
+                  
+            </Stack>
+          ))}
+        </Stack>
       </Modal.Body>
     </Modal>
   );
