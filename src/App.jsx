@@ -4,6 +4,7 @@ import { Container, Stack, Button } from 'react-bootstrap';
 import { Grid } from './components/styles/Grid.styled';
 import BudgetCard from './components/BudgetCard';
 import UncategorisedBudgetCard from './components/UncategorisedBudgetCard';
+import TotalBudgetCard from './components/TotalBudgetCard';
 import AddBudgetModal from './components/AddBudgetModal';
 import AddExpenseModal from './components/AddExpenseModal';
 import { useBudgetCtx } from './store/context';
@@ -68,6 +69,7 @@ function App() {
             )
           })}
           <UncategorisedBudgetCard />
+          <TotalBudgetCard />
         </Grid>
       </Container>
     </Fragment>
