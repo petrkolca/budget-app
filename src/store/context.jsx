@@ -62,7 +62,16 @@ const AppProvider = (props) => {
   };
 
   const deleteBudget = (id) => {
-    console.log('Budget delete func. init', id)
+    // console.log('Budget delete func. init', id)
+    setExpenses((prevExpenses) => {
+      return prevExpenses.map((expense) => {
+        if (expense.budgetId !== id) return expense;
+          
+        return {...expense, budgetId: uncategorisedBudgetId}
+        
+      });
+    });
+
     setBudgets((prevBudgets) => {
       return prevBudgets.filter((budget) => budget.id !== id);
     });
@@ -70,7 +79,6 @@ const AppProvider = (props) => {
 
   const deleteExpense = (id) => {
     // Delete all expenses under certain budget
-    console.log('expense delete func. init', id)
     setExpenses((prevExpenses) => {
       return prevExpenses.filter((expense) => expense.budgetId !== id);
     });
