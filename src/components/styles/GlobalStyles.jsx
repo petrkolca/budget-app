@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyles = createGlobalStyle`
 
   :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --bs-font-sans-serif: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
@@ -28,14 +28,19 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     margin: 0;
-    display: flex;
+    display: grid;
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
+
+    #root {
+      width: 100%;
+    }
   }
 
   h1 {
-    font-size: 3.2em;
+    font-size: 2em;
     line-height: 1.1;
+    font-weight: 500;
   }
 `

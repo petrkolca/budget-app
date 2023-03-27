@@ -30,16 +30,20 @@ const BudgetCard = ({name, amount, max, gray, onAddExpenseBtnClick}) => {
         <Card.Title>
           <div>{name}</div>
           <div>{currencyFormatter.format(amount)}
-            <span>/ {currencyFormatter.format(max)}</span>
+            {max && 
+              <span>/ {currencyFormatter.format(max)}</span>
+            }
           </div>
         </Card.Title>
-        <ProgressBar 
-          className="rounded-pill" 
-          variant={getProgressBarVariant(amount, max)}
-          min={0}
-          max={max}
-          now={amount}
-        />
+        {max && 
+          <ProgressBar 
+            className="rounded-pill" 
+            variant={getProgressBarVariant(amount, max)}
+            min={0}
+            max={max}
+            now={amount}
+          />
+        }
         <Stack direction="horizontal" gap="2" className="mt-4">
           <Button onClick={onAddExpenseBtnClick} variant="outline-primary ms-auto">Add Expense</Button>
           <Button variant="outline-secondary">View Expenses</Button>
