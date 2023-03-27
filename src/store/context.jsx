@@ -80,7 +80,7 @@ const AppProvider = (props) => {
   const deleteExpense = (id) => {
     // Delete all expenses under certain budget
     setExpenses((prevExpenses) => {
-      return prevExpenses.filter((expense) => expense.budgetId !== id);
+      return prevExpenses.filter((expense) => expense.id !== id);
     });
   };
   

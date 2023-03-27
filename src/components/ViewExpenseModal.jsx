@@ -47,7 +47,7 @@ const ViewExpenseModal = ({budgetId, closeModalHandler}) => {
               <Button 
                 variant="outline-danger"
                 size="sm"
-                onClick={() => deleteExpense(budgetId)} 
+                onClick={() => deleteExpense(expense.id)} 
               >
                 &times;
               </Button>
